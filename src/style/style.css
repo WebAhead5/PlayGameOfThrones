@@ -1,0 +1,79 @@
+body {
+    background: rgb(160, 148, 148);
+}
+/* header background img */
+header {
+    display: flex;
+    background-image: url("/res/img/background-header.jpg");
+    background-size: cover;
+    background-color: #cccccc;
+    width: 100%;
+    height: 25vh;
+    border-radius: 2%;   
+    justify-content: center;
+    opacity: 0.9;
+}
+
+header h1 {
+    color: white;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "score char skip"
+                         "choice1 choice2 choice3"
+                         "next next next"; 
+    justify-items: center;                     
+}
+
+/* grid areas initiating */
+.next-btn {
+    grid-area: next;
+    margin-top: 50px;
+}
+
+/* choices 1 until 3 are the figures on the html */
+.choice1 {
+    grid-area: choice1;
+}
+
+.choice2 {
+    grid-area: choice2;
+}
+
+.choice3 {
+    grid-area: choice3;
+}
+
+/* top right corner */
+.skip-btn {
+    grid-area: skip;
+    margin-top: 8px;
+}
+
+/* the h3 on HTML */
+.char-name {
+    grid-area: char;
+    margin-top: 15px;
+}
+
+/*score top left */
+.score {
+    display: flex;
+    grid-area: score;
+}
+
+.score:first-child {
+    margin-top: 8px;
+}
+
+/* top left heart img */
+.score img {
+    margin-right: 5px;
+}
+
+/* text under houses imgs */
+figcaption {
+    text-align: center;
+}
