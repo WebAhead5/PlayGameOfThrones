@@ -104,6 +104,16 @@ button {
     cursor: pointer;
   }
 
+button:hover {
+    background-color:rgb(141, 135, 135)
+}
+
+button:active {
+  background-color: rgb(141, 135, 135);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
   /* screens between 620px - 1080px */
 
 @media screen and (min-width: 620px) {
