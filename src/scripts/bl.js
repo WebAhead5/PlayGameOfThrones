@@ -22,8 +22,9 @@ function init(){
                     characters.push({"name":char.name,"family":char.allegiances[0]});
                 }
            }
+           getCharsFamilyName();
         });
-        getCharsFamilyName();
+
     });
 
     //call get houses api
@@ -60,15 +61,14 @@ function getCharsFamilyName(){
 
 
 function fillQuestions() {
-     charIndex = Math.floor(Math.random() * characters.length);
-     const familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
-     var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
-
-     while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
-        familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
-     }
-
      for(let i=0; i < questionsNumber; i++){
+        charIndex = Math.floor(Math.random() * characters.length);
+        var familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
+        var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
+
+        while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
+            familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
+        }
         questions.push(
            {
            "char": characters[charIndex].name,
@@ -102,6 +102,7 @@ function next(){
 
 //response for answer click
 function answerClick(event){
+    console.log(characters,charIndex,characters[charIndex]);
     let rightAnswer = characters[charIndex].family;
     let chossenAnswer = event.path[1].childNodes[3].innerText;
 
@@ -188,4 +189,4 @@ init();
 setTimeout(function(){
     fillQuestions();
     changeUiToNextQuestion(getQuestion(index),lives);
-},6000);
+},10000);
