@@ -5,6 +5,9 @@ var characters =[];
 var houses = [];
 var questions = [];
 var answerClicked = false;
+var charIndex;
+const ON = "on";
+const OFF = "off";
 
 //init the characters and houses arrays
 function init(){
@@ -20,7 +23,6 @@ function init(){
                 }
            }
         });
-        console.log(characters);
         getCharsFamilyName();
     });
 
@@ -53,13 +55,12 @@ function init(){
 function getCharsFamilyName(){
     characters.map(function(char){
         getHouse(char.family,function(response){char.family = response.name});
-        //getHouse(char.family,function(response){console.log(response.name)});
     });
 }
 
 
 function fillQuestions() {
-     const charIndex = Math.floor(Math.random() * characters.length);
+     charIndex = Math.floor(Math.random() * characters.length);
      const familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
      var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
 
@@ -71,13 +72,12 @@ function fillQuestions() {
         questions.push(
            {
            "char": characters[charIndex].name,
-           "answer1" : characters[charIndex].family,
-           "answer2" : houses[familyNameRandomFirstIndex].name,
-           "answer3" : houses[familyNameRandomSecondIndex].name
+           "answers" : [ characters[charIndex].family,
+                        houses[familyNameRandomFirstIndex].name,
+                        houses[familyNameRandomSecondIndex].name]
            }
         );
      }
-     console.log(questions);
 }
 
 
@@ -102,17 +102,19 @@ function next(){
 
 //response for answer click
 function answerClick(event){
+    let rightAnswer = characters[charIndex].family;
+    let chossenAnswer = event.path[1].childNodes[3].innerText;
+
     const clickedClassName = event.path[2].className;
-    var nextButton = document.getElementById("next");
-    nextButton.addEventListener("click",next);
+    changeNextButtonStatus(ON);
 
     var figure = event.path[2];
 
     if(!answerClicked){
         answerClicked = true;
-        if(clickedClassName.includes("1")){
+        if(chossenAnswer === rightAnswer){
              figure.style.border = '2px solid green';
-        }else if(clickedClassName.includes("2") || clickedClassName.includes("3")){
+        }else{
             figure.style.border = '2px solid red';
             lives -= 1;
         }
@@ -121,7 +123,10 @@ function answerClick(event){
 
 //Dom manipulation
 function changeUiToNextQuestion(question, score){
-   answerClicked = false;
+    answerClicked = false;
+    question.answers = randomizeArray(question.answers);
+
+    changeNextButtonStatus(OFF);
 
     answer1AreaDomElement = document.querySelector('.choice1');
     answer1AreaDomElement.style.border = 'none';
@@ -137,13 +142,13 @@ function changeUiToNextQuestion(question, score){
 
 
     answer1DomElement = document.querySelector('#house1');
-    answer1DomElement.textContent = question.answer1;
+    answer1DomElement.textContent = question.answers[0];
 
     answer2DomElement = document.querySelector('#house2');
-    answer2DomElement.textContent = question.answer2;
+    answer2DomElement.textContent = question.answers[1];
 
     answer3TextDomElement = document.querySelector('#house3');
-    answer3TextDomElement.textContent = question.answer3;
+    answer3TextDomElement.textContent = question.answers[2];
 
     scoreTextDomElement = document.querySelector('#score');
     scoreTextDomElement.innerHTML = score;
@@ -155,21 +160,30 @@ function randomizeArray(array){
     let result = [];
     while(resultIndexes.length < array.length){
         var r = Math.floor(Math.random() * array.length);
-        console.log(r);
         if(resultIndexes.indexOf(r) === -1) resultIndexes.push(r);
     }
-
     for(let i = 0; i < array.length; i++){
         result[i] = array[resultIndexes[i]];
     }
-
     return result;
+}
+
+function changeNextButtonStatus(status){
+    nextButtonDomElement = document.querySelector('#next');
+    if(status == ON){
+       nextButtonDomElement.style.opacity = "1";
+       nextButtonDomElement.addEventListener("click",next);
+       nextButtonDomElement.style.pointerEvents = "visible";
+    }else if(status == OFF){
+       nextButtonDomElement.style.opacity = "0.6";
+       nextButtonDomElement.style.pointerEvents = "none";
+    }
+
 
 }
 
 init();
 
-//console.log(randomizeArray([2,3,4]).join());
 //TODO: this is a temporary solution
 setTimeout(function(){
     fillQuestions();
