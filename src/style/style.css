@@ -1,30 +1,36 @@
 body {
     background: rgb(160, 148, 148);
+    
 }
 /* header background img */
 header {
-    display: flex;
+    display: block;
     background-image: url("../../res/img/background-header.jpg");
     background-size: cover;
     background-color: #cccccc;
     width: 100%;
     height: 40vw;
-    border-radius: 2%;   
-    justify-content: center;
+    border-radius: 2%;
+    text-align: center;   
     opacity: 0.9;
+    grid-area: header;
 }
 
 header h1 {
+    margin-top: 10vw;
     color: white;
+    font-family: monospace;
 }
 
 .main-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "score char skip"
+    grid-template-areas: "header header header"
+                         "score char skip"
                          "choice1 choice2 choice3"
                          "next next next"; 
-    justify-items: center;                     
+    justify-items: center;
+    row-gap: 30px;                     
 }
 
 /* grid areas initiating */
@@ -56,48 +62,139 @@ header h1 {
 .char-name {
     grid-area: char;
     margin-top: 15px;
+    font-family: monospace;
 }
 
 /*score top left */
 .score {
     display: flex;
     grid-area: score;
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: 130%;
 }
 
-.score:first-child {
-    margin-top: 8px;
-}
 
 /* top left heart img */
 .score img {
     margin-right: 5px;
+    margin-top: -5px;
+    width: 30px;
 }
 
 /* text under houses imgs */
 figcaption {
     text-align: center;
 }
+/* img positioning */
+figure img {
+    margin-left: -15%;
+}
+
+button {
+    background-color: rgb(68, 64, 64); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5%;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+button:hover {
+    background-color:rgb(141, 135, 135)
+}
+
+button:active {
+  background-color: rgb(141, 135, 135);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+  /* screens between 620px - 1080px */
 
 @media screen and (min-width: 620px) {
+
+    header {
+        height: 32vw;
+    }
+
+    header h1 {
+        font-size: 300%;
+    }
+
     .choices {
         width: 70%;
     }
 
     #charName {
-        font-size: 130%;
+        font-size: 170%;
     }
 
     .hName {
         font-size: 130%;
     }
 
+    .heart{
+        width: 50px;
+    }
+
+    button {
+        font-size: 20px;
+    }
+
+    .score img {
+        margin-right: 5px;
+        margin-top: -12px;
+        width: 50px;
+    }
     .score {
-        width: ;
+        font-size: 150%;
     }
 }
 
 
 
+/* screens above 1080px */
+
 @media screen and (min-width: 1080px){
 
+    header {
+        height: 30vw;
+    }
+
+    header h1 {
+        font-size: 500%;
+    }
+
+    .choices {
+        width: 50%;
+    }
+
+    #charName {
+        font-size: 200%;
+    }
+
+    .hName {
+        font-size: 150%;
+    }
+
+    .heart{
+        width: 80px;
+    }
+    button {
+        font-size: 25px;
+    }
+
+    .score img {
+        margin-right: 5px;
+        margin-top: -20px;
+        width: 70px;
+    }
+    .score {
+        font-size: 170%;
+    }
 }
