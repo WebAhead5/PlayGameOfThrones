@@ -1,9 +1,10 @@
 var index = 0;
-var lives = 7;
+var lives = 3;
 var questionsNumber = 10;
 var characters =[];
 var houses = [];
 var questions = [];
+var answerClicked = false;
 
 //init the characters and houses arrays
 function init(){
@@ -58,13 +59,21 @@ function getCharsFamilyName(){
 
 
 function fillQuestions() {
+     const charIndex = Math.floor(Math.random() * characters.length);
+     const familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
+     var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
+
+     while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
+        familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
+     }
+
      for(let i=0; i < questionsNumber; i++){
         questions.push(
            {
-           "char": characters[i].name,
-           "answer1" : characters[i].family,
-           "answer2" : houses[i].name,
-           "answer3" : houses[i+1].name
+           "char": characters[charIndex].name,
+           "answer1" : characters[charIndex].family,
+           "answer2" : houses[familyNameRandomFirstIndex].name,
+           "answer3" : houses[familyNameRandomSecondIndex].name
            }
         );
      }
@@ -83,6 +92,7 @@ function skip(){
         lives-= 0.5;
     }
     changeUiToNextQuestion(getQuestion(++index), lives);
+
 }
 
 //response for next click
@@ -92,42 +102,74 @@ function next(){
 
 //response for answer click
 function answerClick(event){
-    console.log(event.path[2]);
     const clickedClassName = event.path[2].className;
     var nextButton = document.getElementById("next");
     nextButton.addEventListener("click",next);
 
     var figure = event.path[2];
-    if(clickedClassName.includes("1")){
-         figure.style.border = '2px solid green';
-    }else{
-         figure.style.border = '2px solid red';
-         lives -= 1;
+
+    if(!answerClicked){
+        answerClicked = true;
+        if(clickedClassName.includes("1")){
+             figure.style.border = '2px solid green';
+        }else if(clickedClassName.includes("2") || clickedClassName.includes("3")){
+            figure.style.border = '2px solid red';
+            lives -= 1;
+        }
     }
 }
 
 //Dom manipulation
 function changeUiToNextQuestion(question, score){
-   questionTextDomElement = document.querySelector('#charName');
-   questionTextDomElement.textContent = question.char;
+   answerClicked = false;
+
+    answer1AreaDomElement = document.querySelector('.choice1');
+    answer1AreaDomElement.style.border = 'none';
+
+    answer2AreaDomElement = document.querySelector('.choice2');
+    answer2AreaDomElement.style.border = 'none';
+
+    answer3AreaDomElement = document.querySelector('.choice3');
+    answer3AreaDomElement.style.border = 'none';
+
+    questionTextDomElement = document.querySelector('#charName');
+    questionTextDomElement.textContent = question.char;
 
 
-   answer1DomElement = document.querySelector('#house1');
-   answer1DomElement.textContent = question.answer1;
+    answer1DomElement = document.querySelector('#house1');
+    answer1DomElement.textContent = question.answer1;
 
-   answer2DomElement = document.querySelector('#house2');
-   answer2DomElement.textContent = question.answer2;
+    answer2DomElement = document.querySelector('#house2');
+    answer2DomElement.textContent = question.answer2;
 
-   answer3TextDomElement = document.querySelector('#house3');
-   answer3TextDomElement.textContent = question.answer3;
+    answer3TextDomElement = document.querySelector('#house3');
+    answer3TextDomElement.textContent = question.answer3;
 
-   scoreTextDomElement = document.querySelector('#score');
-   scoreTextDomElement.innerHTML = score;
+    scoreTextDomElement = document.querySelector('#score');
+    scoreTextDomElement.innerHTML = score;
+
+}
+
+function randomizeArray(array){
+    let resultIndexes = [];
+    let result = [];
+    while(resultIndexes.length < array.length){
+        var r = Math.floor(Math.random() * array.length);
+        console.log(r);
+        if(resultIndexes.indexOf(r) === -1) resultIndexes.push(r);
+    }
+
+    for(let i = 0; i < array.length; i++){
+        result[i] = array[resultIndexes[i]];
+    }
+
+    return result;
 
 }
 
 init();
 
+//console.log(randomizeArray([2,3,4]).join());
 //TODO: this is a temporary solution
 setTimeout(function(){
     fillQuestions();
