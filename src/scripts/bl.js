@@ -5,7 +5,6 @@ var characters =[];
 var houses = [];
 var questions = [];
 var answerClicked = false;
-var charIndex;
 const ON = "on";
 const OFF = "off";
 
@@ -36,7 +35,6 @@ function init(){
            }
         });
         //TODO : be sure to move this line after getting response from both api's'
-
     });
 
 
@@ -62,7 +60,7 @@ function getCharsFamilyName(){
 
 function fillQuestions() {
      for(let i=0; i < questionsNumber; i++){
-        charIndex = Math.floor(Math.random() * characters.length);
+        var charIndex = Math.floor(Math.random() * characters.length);
         var familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
         var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
 
@@ -78,6 +76,8 @@ function fillQuestions() {
            }
         );
      }
+
+     console.log(questions);
 }
 
 
@@ -102,8 +102,7 @@ function next(){
 
 //response for answer click
 function answerClick(event){
-    console.log(characters,charIndex,characters[charIndex]);
-    let rightAnswer = characters[charIndex].family;
+    let rightAnswer = characters.filter(function(char){ return char.name == questions[index].char})[0].family;
     let chossenAnswer = event.path[1].childNodes[3].innerText;
 
     const clickedClassName = event.path[2].className;
