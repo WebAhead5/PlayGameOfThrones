@@ -22,7 +22,6 @@ function getHouses(callback){
         callback);
 }
 
-
-getCharacters(function(result){console.log(result)});
-getHouses(function(result){console.log(result)});
-
+function getHouse(url,callback){
+    return fetch(url, callback);
+}

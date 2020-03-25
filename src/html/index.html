@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play GOT</title>
-    <link rel="stylesheet" href="/src/style/style.css">
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
     <div class="main-container">
     <!-- score on the left side -->
     <div class="score">
-        <div><img src="/res/img/live-img.png" alt="life left heart image" style="width: 25px; margin-top: -5px;"></div>
+        <div><img src="../../res/img/live-img.png" alt="life left heart image" style="width: 25px; margin-top: -5px;"></div>
         <div id="score">3</div>
     </div>
     
@@ -31,33 +31,34 @@
 
     <!-- photos for houses clickable imgs -->
 
-    
         <div class="choice1">
             <figure id="img1">
-                <img src="/res/img/house-stark.png" alt="" width="133.33%">
+                <img src="../../res/img/house-stark.png" alt="" width="133.33%">
                 <figcaption id="house1">House name</figcaption>
-        </figure>
+            </figure>
         </div>
 
         <div class="choice2">
             <figure id="img2">
-                <img src="/res/img/house-stark.png" alt="" width="133.33%">
+                <img src="../../res/img/house-stark.png" alt="" width="133.33%">
                 <figcaption id="house2">House name</figcaption>
             </figure>
         </div>
 
         <div class="choice3">
             <figure id="img3">
-                <img src="/res/img/house-stark.png" alt="" width="133.33%">
-                <figcaption id="house2">House name</figcaption>
+                <img src="../../res/img/house-stark.png" alt="" width="133.33%">
+                <figcaption id="house3">House name</figcaption>
             </figure>
     </div>
 
     <!-- next -->
     <div class="next-btn">
-        <button>Next</button>
+        <button id="next">Next</button>
     </div>
 </div>
 
 </body>
+<script src="../scripts/api.js"></script>
+<script src="../scripts/bl.js"></script>
 </html>
