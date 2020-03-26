@@ -116,7 +116,8 @@ function answerClick(event){
              figure.style.border = '2px solid green';
         }else{
             figure.style.border = '2px solid red';
-            lives -= 1;
+            if(lives >= 1)
+                lives -= 1;
         }
     }
 }
