@@ -59,28 +59,34 @@ function getCharsFamilyName(){
 
 
 function fillQuestions() {
-     let tempQuestions = new Set();
-     while(questions.length < 10){
+     var tempChars = new Set();
+     while(tempChars.size < 10){
         var charIndex = Math.floor(Math.random() * characters.length);
-        var familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
-        var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
 
-        while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
-            familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
-        }
-        tempQuestions.add(
+        tempChars.add(
            {
-           "char": characters[charIndex].name,
-           "answers" : [ characters[charIndex].family,
-                        houses[familyNameRandomFirstIndex].name,
-                        houses[familyNameRandomSecondIndex].name]
+           "char": characters[charIndex].name
            }
         );
      }
 
-     questions = Array.from(tempQuestions);
 
-     console.log(questions);
+     questions = Array.from(tempChars);
+
+     questions.map(function(element){
+        var familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
+        var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
+        let rightAnswer = characters.filter(function(char){ return char.name == element.char})[0].family;
+        while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
+            familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
+        }
+        element["answers"] =
+                      [ rightAnswer,
+                        houses[familyNameRandomFirstIndex].name,
+                        houses[familyNameRandomSecondIndex].name]
+
+     });
+
 }
 
 
