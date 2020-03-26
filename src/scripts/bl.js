@@ -101,8 +101,11 @@ function getQuestion(index){
 function skip(){
     if(lives > 0.5){
         lives-= 0.5;
+        changeUiToNextQuestion(getQuestion(++index), lives);
+    }else{
+        alert("Skip not allowed - your score less than 1")
     }
-    changeUiToNextQuestion(getQuestion(++index), lives);
+
 
 }
 
@@ -131,6 +134,10 @@ function answerClick(event){
                 lives -= 1;
             scoreTextDomElement = document.querySelector('#score');
             scoreTextDomElement.innerHTML = lives;
+            if(lives <= 0){
+                alert("GAME OVER - Play again?");
+                location.reload();
+            }
         }
 
 
