@@ -129,7 +129,11 @@ function answerClick(event){
             figure.style.border = '2px solid red';
             if(lives >= 1)
                 lives -= 1;
+            scoreTextDomElement = document.querySelector('#score');
+            scoreTextDomElement.innerHTML = lives;
         }
+
+
     }
 }
 
