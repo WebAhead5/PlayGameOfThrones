@@ -83,7 +83,9 @@ function fillQuestions() {
 
 // get question according to index
 function getQuestion(index){
-    return questions[index];
+    if(index < questions.length){
+        return questions[index];
+    }
 }
 
 // response for skip click
