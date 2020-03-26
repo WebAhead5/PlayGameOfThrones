@@ -50,5 +50,6 @@ if the player decides he wants to skip the question he will lose half a life, if
     We used DOM manipulation, javascript, HTML & CSS for this project.
 
 ---
+https://webahead5.github.io/PlayGameOfThrones/src/html/index.html
 
 # HAVE FUN 
