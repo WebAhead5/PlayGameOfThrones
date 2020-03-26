@@ -157,15 +157,13 @@ function changeUiToNextQuestion(question, score){
 
 function randomizeArray(array){
     let resultIndexes = [];
-    let result = [];
     while(resultIndexes.length < array.length){
         var r = Math.floor(Math.random() * array.length);
         if(resultIndexes.indexOf(r) === -1) resultIndexes.push(r);
     }
-    for(let i = 0; i < array.length; i++){
-        result[i] = array[resultIndexes[i]];
-    }
-    return result;
+    return array.map(function(value,index){
+        return array[resultIndexes[index]];
+    });
 }
 
 function changeNextButtonStatus(status){
@@ -183,7 +181,6 @@ function changeNextButtonStatus(status){
 }
 
 init();
-
 //TODO: this is a temporary solution
 setTimeout(function(){
     fillQuestions();
