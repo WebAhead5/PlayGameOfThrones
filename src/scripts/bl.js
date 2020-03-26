@@ -188,4 +188,4 @@ init();
 setTimeout(function(){
     fillQuestions();
     changeUiToNextQuestion(getQuestion(index),lives);
-},10000);
+},6000);
