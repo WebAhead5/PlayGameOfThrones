@@ -59,7 +59,8 @@ function getCharsFamilyName(){
 
 
 function fillQuestions() {
-     for(let i=0; i < questionsNumber; i++){
+     let tempQuestions = new Set();
+     while(questions.length < 10){
         var charIndex = Math.floor(Math.random() * characters.length);
         var familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
         var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
@@ -67,7 +68,7 @@ function fillQuestions() {
         while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
             familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
         }
-        questions.push(
+        tempQuestions.add(
            {
            "char": characters[charIndex].name,
            "answers" : [ characters[charIndex].family,
@@ -76,6 +77,8 @@ function fillQuestions() {
            }
         );
      }
+
+     questions = Array.from(tempQuestions);
 
      console.log(questions);
 }
