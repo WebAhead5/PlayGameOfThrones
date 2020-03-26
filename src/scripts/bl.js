@@ -64,29 +64,29 @@ function fillQuestions() {
         var charIndex = Math.floor(Math.random() * characters.length);
 
         tempChars.add(
-           {
-           "char": characters[charIndex].name
-           }
+            characters[charIndex].name
         );
      }
 
+     questionsTemp = Array.from(tempChars);
 
-     questions = Array.from(tempChars);
-
-     questions.map(function(element){
+     questions = questionsTemp.map(function(element){
         var familyNameRandomFirstIndex = Math.floor(Math.random() * houses.length);
         var familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
-        let rightAnswer = characters.filter(function(char){ return char.name == element.char})[0].family;
+        let rightAnswer = characters.filter(function(char){ return char.name == element})[0].family;
         while(familyNameRandomFirstIndex === familyNameRandomSecondIndex ){
             familyNameRandomSecondIndex = Math.floor(Math.random() * houses.length);
         }
-        element["answers"] =
+        return {
+                "char" : element,
+
+                "answers":
                       [ rightAnswer,
                         houses[familyNameRandomFirstIndex].name,
                         houses[familyNameRandomSecondIndex].name]
+                        }
 
      });
-
 }
 
 
@@ -111,7 +111,12 @@ function skip(){
 
 //response for next click
 function next(){
-    changeUiToNextQuestion(getQuestion(++index), lives);
+    if(index <= 9){
+        changeUiToNextQuestion(getQuestion(++index), lives);
+    }else{
+        alert("Amazinggggg - Play again?");
+        location.reload();
+    }
 }
 
 //response for answer click
