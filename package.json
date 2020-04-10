@@ -1,0 +1,19 @@
+{
+  "name": "playgameofthrones",
+  "version": "1.0.0",
+  "description": "![](https://i.imgur.com/1SNqWjb.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebAhead5/PlayGameOfThrones.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebAhead5/PlayGameOfThrones/issues"
+  },
+  "homepage": "https://github.com/WebAhead5/PlayGameOfThrones#readme"
+}

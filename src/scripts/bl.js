@@ -57,7 +57,6 @@ function getCharsFamilyName(){
     });
 }
 
-
 function fillQuestions() {
      var tempChars = new Set();
      while(tempChars.size < 10){
@@ -88,7 +87,6 @@ function fillQuestions() {
 
      });
 }
-
 
 // get question according to index
 function getQuestion(index){
